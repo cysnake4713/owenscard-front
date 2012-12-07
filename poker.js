@@ -1,19 +1,42 @@
 ﻿var pokerImage = new Image();
 pokerImage.src = 'poker.png';
-var pokerLayer = new Kinetic.Layer();
+var pokerLayer;
 var stage;
 var pokerArray = new Array();
-var windowHeight = $(window).height()-70;
-var windowWidth = $(window).width();
-var crPokerCenterWidth = $(window).width()/2;
-var crPokerCenterHeight = $(window).height()/4;
+var config = new Array();
+
+
+/*
+init config
+*/
+function initConfig(configArray){
+	configArray["windowHeight"] = $(window).height()-65;
+	configArray["windowWidth"] = $(window).width();
+	configArray["position"] = new Array();
+	configArray["position"]["bottomCenterWidth"] = configArray["windowWidth"]/2;
+	configArray["position"]["bottomCenterHeight"] = configArray["windowHeight"]-100;
+	
+	configArray["position"]["leftCenterWidth"] = 0;
+	configArray["position"]["leftCenterHeight"] = (configArray["windowHeight"]-100)/2;
+	
+	configArray["position"]["rightCenterWidth"] = configArray["windowWidth"]-110;
+	configArray["position"]["rightCenterHeight"] = (configArray["windowHeight"]-100)/2;
+	
+	configArray["position"]["topLeftCenterWidth"] = configArray["windowWidth"]/4;
+	configArray["position"]["topLeftCenterHeight"] = 0;
+	
+	configArray["position"]["topRightCenterWidth"] = (configArray["windowWidth"]/4)*3;
+	configArray["position"]["topRightCenterHeight"] = 0;
+}
+
 function init(){
+	initConfig(config);
 	stage = new Kinetic.Stage({
 		container: 'container',
-		width: windowWidth,
-		height: windowHeight
+		width: config["windowWidth"],
+		height: config["windowHeight"]
 	});
-	pokerLayer = new Kinetic.Layer();
+
 
 	pokersToArray();
 
@@ -23,23 +46,21 @@ function init(){
 }
 
 function testPoker(){
-	//pokerArray["hearts"][0].setPosition(crPokerCenterWidth, crPokerCenterHeight*3);
-	var t=0;
-	var x =0;
-	for (var i in pokerArray){
-			for (var j in pokerArray[i]){
-				pokerArray[i][j].setPosition(t*5,x*5);
-				t++;
-				x++;
-			}
-		}
+	pokerArray["hearts"][0].setPosition(config["position"]["bottomCenterWidth"], config["position"]["bottomCenterHeight"]);
+	pokerArray["hearts"][1].setPosition(config["position"]["leftCenterWidth"], config["position"]["leftCenterHeight"]);
+	pokerArray["hearts"][2].setPosition(config["position"]["rightCenterWidth"], config["position"]["rightCenterHeight"]);
+	pokerArray["hearts"][3].setPosition(config["position"]["topLeftCenterWidth"], config["position"]["topLeftCenterHeight"]);
+	pokerArray["hearts"][4].setPosition(config["position"]["topRightCenterWidth"], config["position"]["topRightCenterHeight"]);
 	stage.draw();
 }
+
+
 
 /*
 将pokerArray中的poker初始化到stage的poker layer中，默认位置在（-100,-100）
 */
 function pokersToStage(){
+	pokerLayer = new Kinetic.Layer();
 	pokerImage.onload = function(){
 		// add the shape to the layer
 		for (var i in pokerArray){
@@ -79,22 +100,20 @@ function pokersToArray(){
 背面: x = 4 (y = 2~5)
 */
 function getPokerByIndex(x, y){
-	//pokerImage.onload = function() {
-		var poker = new Kinetic.Image({
-			image: pokerImage,
-			x:-100,
-			y:-100,
+	var poker = new Kinetic.Image({
+		image: pokerImage,
+		x:-100,
+		y:-100,
+		width: 70,
+		height: 95,
+		crop: {
+			x: 70*x,
+			y: 95*y,
 			width: 70,
-			height: 95,
-			crop: {
-				x: 70*x,
-				y: 95*y,
-				width: 70,
-				height: 95
-			},
-			draggable: true
-		});
-	//};
+			height: 95
+		}
+//		,draggable: true
+	});
 	return poker;
 }
 
