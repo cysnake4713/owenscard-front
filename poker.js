@@ -2,7 +2,6 @@
 pokerImage.src = 'poker.png';
 var stage;
 var pokerArray = new Array();
-var config = new Array();
 var layerArray = new Array();
 
 function init() {
@@ -46,9 +45,9 @@ function init() {
 		 */
 		function pokersToArray() {
 			var pokerColor = new Array("diamond", "club", "hearts", "spade");
-			for(var i in pokerColor) {
+			for (var i in pokerColor) {
 				pokerArray[pokerColor[i]] = new Array();
-				for(var j = 0; j < 13; j++) {
+				for (var j = 0; j < 13; j++) {
 					pokerArray[pokerColor[i]][j] = getPokerByIndex(j, i);
 				}
 			}
@@ -60,7 +59,7 @@ function init() {
 		pokerImage.onload = function() {
 			// add the shape to the layer
 			layerArray["pokerDataLayer"] = new Kinetic.Layer();
-			for(var i in pokerArray) {
+			for (var i in pokerArray) {
 				addPokerArrayToLayer(pokerArray[i], layerArray["pokerDataLayer"]);
 			}
 			//pokerLayer.add(pokerArray["back"][0]);
@@ -146,7 +145,7 @@ function testPoker() {
  */
 function createPokersByMessage(message) {
 	var result = new Array();
-	for(var i in message) {
+	for (var i in message) {
 		var poker = pokerArray[message[i][0]][message[i][1]].clone();
 		result.push(poker);
 	}
@@ -157,8 +156,8 @@ function createPokersByMessage(message) {
  clean the stage
  */
 function clearAll() {
-	for(var i in layerArray) {
-		if(i != "pokerDataLayer") {
+	for (var i in layerArray) {
+		if (i != "pokerDataLayer") {
 			layerArray[i].removeChildren();
 			layerArray[i].clear();
 		}
@@ -169,7 +168,7 @@ function clearAll() {
  将poker Image加入到指定Layer中
  */
 function addPokerArrayToLayer(pokers, layer) {
-	for(var i in pokers) {
+	for (var i in pokers) {
 		layer.add(pokers[i]);
 	}
 }
@@ -200,10 +199,10 @@ function drawPokers(pokers, position) {
 
 	function drawPokersTopLeft(pokers) {
 		var pokerTotal = pokers.length;
-		if(pokerTotal > 0) {
+		if (pokerTotal > 0) {
 			var totalLength = (pokerTotal - 1) * config["const"]["pokerWidth"] + config["const"]["pokerSpacing"] * (pokerTotal - 1);
 			var currentPosition = config["position"]["topLeftCenterWidth"] + totalLength / 2;
-			for(var i in pokers) {
+			for (var i in pokers) {
 				var poker = pokers[i];
 				poker.rotateDeg(180);
 				poker.setPosition(currentPosition, config["position"]["topLeftCenterHeight"]);
@@ -214,10 +213,10 @@ function drawPokers(pokers, position) {
 
 	function drawPokersTopRight(pokers) {
 		var pokerTotal = pokers.length;
-		if(pokerTotal > 0) {
+		if (pokerTotal > 0) {
 			var totalLength = (pokerTotal - 1) * config["const"]["pokerWidth"] + config["const"]["pokerSpacing"] * (pokerTotal - 1);
 			var currentPosition = config["position"]["topRightCenterWidth"] + totalLength / 2;
-			for(var i in pokers) {
+			for (var i in pokers) {
 				var poker = pokers[i];
 				poker.rotateDeg(180);
 				poker.setPosition(currentPosition, config["position"]["topRightCenterHeight"]);
@@ -228,10 +227,10 @@ function drawPokers(pokers, position) {
 
 	function drawPokersBottom(pokers) {
 		var pokerTotal = pokers.length;
-		if(pokerTotal > 0) {
+		if (pokerTotal > 0) {
 			var totalLength = (pokerTotal - 1) * config["const"]["pokerWidth"] + config["const"]["pokerSpacing"] * (pokerTotal - 1);
 			var currentPosition = config["position"]["bottomCenterWidth"] - totalLength / 2;
-			for(var i in pokers) {
+			for (var i in pokers) {
 				var poker = pokers[i];
 				poker.setPosition(currentPosition, config["position"]["bottomCenterHeight"]);
 				currentPosition += config["const"]["pokerWidth"] + config["const"]["pokerSpacing"];
@@ -241,10 +240,10 @@ function drawPokers(pokers, position) {
 
 	function drawPokersLeft(pokers) {
 		var pokerTotal = pokers.length;
-		if(pokerTotal > 0) {
+		if (pokerTotal > 0) {
 			var totalLength = (pokerTotal - 1) * config["const"]["pokerWidth"] + config["const"]["pokerSpacing"] * (pokerTotal - 1);
 			var currentPosition = config["position"]["leftCenterHeight"] - totalLength / 2;
-			for(var i in pokers) {
+			for (var i in pokers) {
 				var poker = pokers[i];
 				poker.rotateDeg(90);
 				poker.setPosition(config["position"]["leftCenterWidth"], currentPosition);
@@ -255,10 +254,10 @@ function drawPokers(pokers, position) {
 
 	function drawPokersRight(pokers) {
 		var pokerTotal = pokers.length;
-		if(pokerTotal > 0) {
+		if (pokerTotal > 0) {
 			var totalLength = (pokerTotal - 1) * config["const"]["pokerWidth"] + config["const"]["pokerSpacing"] * (pokerTotal - 1);
 			var currentPosition = config["position"]["rightCenterHeight"] + totalLength / 2;
-			for(var i in pokers) {
+			for (var i in pokers) {
 				var poker = pokers[i];
 				poker.rotateDeg(-90);
 				poker.setPosition(config["position"]["rightCenterWidth"], currentPosition);
