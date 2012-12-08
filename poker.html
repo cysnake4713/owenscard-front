@@ -24,10 +24,30 @@
 		<div id="container"></div>
 		<script>
 			$(document).ready(function() {
-				// init()；
+				Poker.Component.init();
 
 			})
+			function testPoker() {
+				var msg = [["hearts", 1], ["hearts", 2], ["back", 0]];
+				var call = function(e) {
+					e.on("mouseover", function() {
+						this.setScale(1.1);
+						Poker.Component.stage.draw();
+					});
+					e.on("mouseout", function() {
+						this.setScale(1);
+						Poker.Component.stage.draw();
+					});
 
+				}
+				Poker.Component.Layers.bottomLayer.drawByMessage(msg, call);
+				Poker.Component.stage.draw();
+			}
+
+			function clearAll() {
+				Poker.Component.Layers.bottomLayer.clear();
+
+			}
 		</script>
 	</body>
 </html>

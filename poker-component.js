@@ -92,12 +92,12 @@ Poker.Component.Layers.bottomLayer = (function() {
 			layer.clear();
 			layer.removeChildren();
 		},
-		drawByMessage : function(message) {
+		drawByMessage : function(message, callback) {
 			var pokers = Poker.tools.createPokersByMessage(message);
-			this.drawByPokers(pokers);
+			this.drawByPokers(pokers, callback);
 		},
 
-		drawByPokers : function(pokers) {
+		drawByPokers : function(pokers, callback) {
 			var pokerTotal = pokers.length;
 			if (pokerTotal > 0) {
 				var totalLength = (pokerTotal - 1) * Poker.CONST.POKER_WIDTH + Poker.CONST.POKER_SPACING * (pokerTotal - 1);
@@ -105,6 +105,9 @@ Poker.Component.Layers.bottomLayer = (function() {
 				for (var i in pokers) {
 					var poker = pokers[i];
 					poker.setPosition(currentPosition, Poker.Position.Bottom.centerY);
+					if (callback != null) {
+						callback(poker);
+					}
 					currentPosition += Poker.CONST.POKER_WIDTH + Poker.CONST.POKER_SPACING;
 				}
 			}
