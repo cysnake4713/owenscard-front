@@ -9,9 +9,9 @@
 		<script src="poker-tools.js" type="text/javascript"></script>
 		<script src="poker-component.js" type="text/javascript"></script>
 		<style rel="text/css" media="screen">
-			body {
-				background: url(background.jpg);
-			}
+body {
+	background:url(background.jpg);
+}
 		</style>
 	</head>
 	<body>
@@ -28,24 +28,15 @@
 
 			})
 			function testPoker() {
-				var msg = [["hearts", 1], ["hearts", 2], ["back", 0]];
-				var call = function(e) {
-					e.on("mouseover", function() {
-						this.setScale(1.1);
-						Poker.Component.stage.draw();
-					});
-					e.on("mouseout", function() {
-						this.setScale(1);
-						Poker.Component.stage.draw();
-					});
+				var msg = [["back", 0], ["back", 0], ["hearts", 1], ["hearts", 2], ["hearts", 3]];
+				var msg2 = [["hearts", 1], ["hearts", 2], ["back", 0]];
+				var pokers = Poker.Component.Layers.leftLayer.drawShowCards(msg, 3);
 
-				}
-				Poker.Component.Layers.bottomLayer.drawByMessage(msg, call);
-				Poker.Component.stage.draw();
+				// Poker.Component.stage.draw();
 			}
 
 			function clearAll() {
-				Poker.Component.Layers.bottomLayer.clear();
+				Poker.Component.Layers.leftLayer.clear();
 
 			}
 		</script>

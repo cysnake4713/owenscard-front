@@ -8,6 +8,8 @@ Poker.CONST = {
 	POKER_WIDTH : 70,
 	POKER_HEIGHT : 95,
 	POKER_SPACING : 10,
+	POKER_CLICK_UP_SPACING : 20,
+	POKER_SHOW_SPACING : 20,
 
 	POKER_COLOR : {
 		DIAMOND : "diamond",
@@ -44,4 +46,3 @@ Poker.Position = {
 		centerY : 60
 	}
 }
-
