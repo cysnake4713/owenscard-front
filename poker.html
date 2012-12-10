@@ -9,13 +9,16 @@
 		<script src="poker-tools.js" type="text/javascript"></script>
 		<script src="poker-component.js" type="text/javascript"></script>
 		<style rel="text/css" media="screen">
-body {
-	background:url(background.jpg);
-}
+			body {
+				background: url(background.jpg);
+			}
 		</style>
 	</head>
 	<body>
-		<button onclick="testPoker();" >
+		<button onclick="testReceivePoker();" >
+			来一发
+		</button>
+		<button onclick="testShowPoker();" >
 			来一发
 		</button>
 		<button onclick="clearAll();" >
@@ -27,17 +30,40 @@ body {
 				Poker.Component.init();
 
 			})
-			function testPoker() {
+			function testReceivePoker() {
 				var msg = [["back", 0], ["back", 0], ["hearts", 1], ["hearts", 2], ["hearts", 3]];
 				var msg2 = [["hearts", 1], ["hearts", 2], ["back", 0]];
-				var pokers = Poker.Component.Layers.leftLayer.drawShowCards(msg, 3);
+				layers = Poker.Component.Layers;
+				layers.leftLayer.drawReceiveCards(msg, 3);
+				layers.rightLayer.drawReceiveCards(msg, 3);
+				layers.topLeftLayer.drawReceiveCards(msg, 3);
+				layers.topRightLayer.drawReceiveCards(msg, 3);
+				layers.bottomLayer.drawReceiveCards(msg);
 
-				// Poker.Component.stage.draw();
+				Poker.Component.stage.draw();
 			}
+			
+			function testShowPoker(){
+				var msg = [["back", 0], ["back", 0], ["hearts", 1], ["hearts", 2], ["hearts", 3]];
+				var msg2 = [["hearts", 1], ["hearts", 2], ["back", 0]];
+				
+				layers = Poker.Component.Layers;
+				layers.leftLayer.drawShowCards(msg, 3);
+				layers.rightLayer.drawShowCards(msg, 3);
+				layers.topLeftLayer.drawShowCards(msg, 3);
+				layers.topRightLayer.drawShowCards(msg, 3);
+				layers.bottomLayer.drawShowCards(msg, msg2);
+
+				Poker.Component.stage.draw();
+			}
+			
 
 			function clearAll() {
-				Poker.Component.Layers.leftLayer.clear();
-
+				layers.leftLayer.clear();
+				layers.rightLayer.clear();
+				layers.topLeftLayer.clear();
+				layers.topRightLayer.clear();
+				layers.bottomLayer.clear();
 			}
 		</script>
 	</body>
