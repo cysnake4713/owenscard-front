@@ -18,3 +18,4 @@ Poker.Builder = {
 		pokerArray["back"][0] = getPokerByIndex(3, 4);
 	}
 }
+
